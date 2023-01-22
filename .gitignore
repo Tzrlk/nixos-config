@@ -1,0 +1,9 @@
+*.log
+
+# NixOS
+/result
+hardware-configuration.nix
+
+# IntelliJ
+.idea/
+*.iml
