@@ -6,6 +6,7 @@
 		./modules.d/network.nix
 		./modules.d/nginx.nix
 		./modules.d/xserver.nix
+		./modules.d/console.nix
 	];
 
 }

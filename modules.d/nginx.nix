@@ -1,5 +1,7 @@
 { config, pkgs, ... }: {
 
+	environment.systemPackages = [ pkgs.nginx ];
+
 	networking.firewall = {
 		enable          = true;
 		allowedTCPPorts = [ 80 443 ];
@@ -24,10 +26,10 @@
 		virtualHosts = {
 			"prometheus.aetheric.co.nz" = {
 				http2      = true;
-				enableACME = true;
-				forceSSL   = true;
 				serverAliases = [
-#					"media.aetheric.co.nz"
+					"prometheus.home"
+					"prometheus"
+					"localhost"
 				];
 			};
 		};
