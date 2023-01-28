@@ -7,14 +7,6 @@
     ncdu   # filesystem usage
     nload  # network monitoring
 
-    # Dev
-    git
-    vim
-    vimPlugins.nginx-vim
-    vimPlugins.ranger-vim
-    vimPlugins.vim-nix
-    vimPlugins.vim-pathogen
-
   ];
 
 }

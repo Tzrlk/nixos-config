@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
 
 	environment.systemPackages = [ pkgs.nginx ];
 
@@ -12,6 +12,8 @@
 		defaults.email = "peterc@aetheric.co.nz";
 		acceptTerms = true;
 	};
+
+	systemd.services.nginx.serviceConfig.Restart = lib.mkForce "always";
 
 	# Common nginx setup.
 	services.nginx = {

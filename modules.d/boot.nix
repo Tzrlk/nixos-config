@@ -1,5 +1,8 @@
 { config, pkgs, ... }: {
 	boot = {
+
+		supportedFilesystems = [ "ntfs" ];
+
 		kernelModules = [
 			"kvm-intel"
 			"efivarfs"

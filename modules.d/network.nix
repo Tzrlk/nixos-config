@@ -1,19 +1,27 @@
 { config, pkgs, lib, ... }: {
 
 	networking = {
+		defaultGateway = "192.168.1.254";
+		nameservers    = [ "192.168.1.254" ];
+		domain         = "home";
 
 		hostName       = "prometheus";
+		search         = [ "home" ];
 		networkmanager = {
 			enable    = true;
 			unmanaged = [ "interface-name:ve-*" ];
 		};
 
+		firewall = {
+			enable = true;
+		};
+
 		interfaces = {
-			"lan" = {
-				useDHCP = lib.mkDefault true;
+			"eno1" = {
+				useDHCP = true;
 			};
 			"lan-usb" = {
-				useDHCP = lib.mkDefault true;
+				useDHCP = true;
 			};
 		};
 
@@ -27,22 +35,6 @@
 		# still possible to use this option, but it's recommended to use it in conjunction
 		# with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
 		useDHCP = lib.mkDefault true;
-		# networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-
-	};
-
-	# Rename network interfaces
-	systemd.network.links = {
-
-		"lan" = {
-			matchConfig.PermanentMACAddress = "60:a4:4c:54:8f:ed";
-			linkConfig.Name = "lan";
-		};
-
-		"lan-usb" = {
-			matchConfig.PermanentMACAddress = "0c:37:96:4b:7b:48";
-			linkConfig.Name = "lan-usb";
-		};
 
 	};
 

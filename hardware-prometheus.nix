@@ -1,19 +1,27 @@
 { config, lib, pkgs, modulesPath, ... }: {
-  imports = [
-    ( modulesPath + "/installer/scan/not-detected.nix" )
-  ];
+	nixpkgs.config.allowUnfree = true;
 
-  fileSystems = {
-    "/"     = { device = "/dev/disk/by-label/nixos";    fsType = "ext4"; };
-    "/boot" = { device = "/dev/disk/by-uuid/D07D-AC98"; fsType = "vfat"; };
-  };
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/9c1380f6-78d5-4fdc-af6d-103d16bbea20"; }
-  ];
+	imports = [
+		( modulesPath + "/installer/scan/not-detected.nix" )
+	];
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+	fileSystems = {
+		"/"     = { device = "/dev/disk/by-label/nixos"; fsType = "ext4"; };
+		"/boot" = { device = "/dev/disk/by-label/boot";  fsType = "vfat"; };
+		"/data" = { device = "/dev/disk/by-label/data";  fsType = "ext4"; };
+	};
+	swapDevices = [
+		{ device = "/dev/disk/by-label/swap"; }
+	];
 
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
+	hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+	# high-resolution display
+	hardware.video.hidpi.enable = lib.mkDefault true;
+
+	# NVIDIA drivers are unfree.
+	hardware.opengl.enable        = true;
+	hardware.nvidia.package       = config.boot.kernelPackages.nvidiaPackages.stable;
+	services.xserver.videoDrivers = [ "nvidia" ];
 
 }

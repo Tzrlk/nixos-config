@@ -1,15 +1,18 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
 
 	environment.systemPackages = [ pkgs.komga ];
 	services.komga = {
-		enable = true;
+		enable       = true;
+		openFirewall = true;
 	};
-	# TODO: create application.yml at /config
+
+	systemd.services.komga.serviceConfig.Restart = lib.mkForce "always";
 
 	services.nginx.virtualHosts = {
 		"prometheus.aetheric.co.nz" = {
 			locations = {
 				"/komga" = {
+					proxyPass = "http://localhost:8080";
 				};
 			};
 		};
