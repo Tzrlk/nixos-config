@@ -31,7 +31,7 @@
 				comment    = "Media library.";
 				path       = "/data/media";
 				browseable = "yes";
-				readable   =  "yes";
+				readable   = "yes";
 				writable   = "no";
 				public     = "yes";
 			};

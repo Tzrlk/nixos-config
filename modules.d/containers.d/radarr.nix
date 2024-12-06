@@ -7,7 +7,7 @@
 		openFirewall = true;
 	};
 
-	users.users."radarr".extraGroups = [ "users" ];
+	users.users."radarr".extraGroups = [ "users" "aria2" ];
 
 	systemd.services.radarr.serviceConfig.Restart = lib.mkForce "always";
 

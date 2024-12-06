@@ -6,6 +6,8 @@
 		openFirewall = true;
 	};
 
+	users.users."jackett".extraGroups = [ "users" ];
+
 	services.nginx.virtualHosts = {
 		"prometheus.aetheric.co.nz" = {
 			locations = {

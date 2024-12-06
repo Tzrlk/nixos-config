@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }: {
 
+	services.openssh = {
+		enable = true;
+		permitRootLogin = "no";
+	};
+
 	networking = {
 		defaultGateway = "192.168.1.254";
 		nameservers    = [ "192.168.1.254" ];
@@ -9,7 +14,10 @@
 		search         = [ "home" ];
 		networkmanager = {
 			enable    = true;
-			unmanaged = [ "interface-name:ve-*" ];
+			unmanaged = [
+				"interface-name:ve-*"
+				"interface-name:cni-*"
+			];
 		};
 
 		firewall = {
@@ -20,14 +28,14 @@
 			"eno1" = {
 				useDHCP = true;
 			};
-			"lan-usb" = {
-				useDHCP = true;
+			"enp0s29u1u6u1i5" = {
+				useDHCP = false;
 			};
 		};
 
 		nat = {
 			enable = true;
-			externalInterface = "lan";
+			externalInterface = "eno1";
 		};
 
 		# Enables DHCP on each ethernet and wireless interface. In case of scripted networking

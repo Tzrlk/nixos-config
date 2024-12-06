@@ -7,6 +7,8 @@
 		openFirewall = true;
 	};
 
+	users.users."sonarr".extraGroups = [ "users" ];
+
 	systemd.services.prowlarr.serviceConfig.Restart = lib.mkForce "always";
 
 	services.nginx.virtualHosts = {

@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+
+  app:
+    image:      monica:fpm
+    restart:    always
+    depends_on: [ db ]
+    ports:      [ "${WEB_PORT}:80" ]
+    environment:
+      - APP_ENV=production
+      - DB_HOST=db
+      - DB_DATABASE=monica
+      - DB_USERNAME=monica
+      - DB_PASSWORD=secret
+      - LOG_CHANNEL=stderr
+      - CACHE_DRIVER=database
+      - SESSION_DRIVER=database
+      - QUEUE_DRIVER=sync
+    volumes:
+      - data:/var/www/html/storage
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=monica
+      - MYSQL_USER=monica
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+
+  data:
+    name: data
+
+  mysql:
+    name: mysql

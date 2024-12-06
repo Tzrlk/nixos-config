@@ -27,7 +27,7 @@ in {
 
 	services.aria2 = {
 		enable         = true;
-		downloadDir    = "/media/downloads";
+		downloadDir    = "/data/media/downloads";
 		rpcListenPort  = 6800; # default
 		rpcSecret      = "aria2rpc"; # default
 		openPorts      = true;

@@ -1,22 +1,22 @@
 { config, lib, pkgs, ... }: {
 
-	environment.systemPackages = [ pkgs.sonarr ];
+	environment.systemPackages = [ pkgs.lidarr ];
 
-	services.sonarr = {
+	services.lidarr = {
 		enable       = true;
 		openFirewall = true;
 	};
 
-	users.users."sonarr".extraGroups = [ "users" ];
+	users.users."lidarr".extraGroups = [ "users" "aria2" ];
 
-	systemd.services.sonarr.serviceConfig.Restart = lib.mkForce "always";
+	systemd.services.lidarr.serviceConfig.Restart = lib.mkForce "always";
 
 	services.nginx.virtualHosts = {
 		"prometheus.aetheric.co.nz" = {
 			locations = {
-				# https://wiki.servarr.com/sonarr/installation#nginx
-				"/sonarr" = {
-					proxyPass = "http://127.0.0.1:8989/sonarr";
+				# https://wiki.servarr.com/lidarr/installation#nginx
+				"/lidarr" = {
+					proxyPass = "http://localhost:8686/lidarr";
 					extraConfig = ''
 						proxy_set_header Upgrade    $http_upgrade;
 						proxy_set_header Connection $http_connection;

@@ -7,7 +7,13 @@
 		openFirewall = true;
 	};
 
-	users.users."jellyfin".extraGroups = [ "users" ];
+	users.users."jellyfin".extraGroups = [
+		"users"
+		"aria2"
+		"sonarr"
+		"radarr"
+		"lidarr"
+	];
 
 	systemd.services.jellyfin.serviceConfig.Restart = lib.mkForce "always";
 
