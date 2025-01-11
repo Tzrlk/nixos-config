@@ -5,19 +5,17 @@
 		systemPackages = with pkgs; [
 
             # Utils
-            wget
-            nixos-option
-            usbutils
+#            wget
+#            usbutils
 
             # Tools
-            ranger # file browser
-            ncdu   # filesystem usage
-            nload  # network monitoring
+#            ranger # file browser
+#            ncdu   # filesystem usage
+#            nload  # network monitoring
 
         ];
 
         shellAliases = {
-            nixopt = "nixos-option";
         };
 
 	};

@@ -9,6 +9,12 @@
 			git
 			gnumake
 
+			jetbrains.idea-ultimate
+
+			vscode
+			vscode-extensions.editorconfig.editorconfig
+			vscode-extensions.jnoortheen.nix-ide
+
 			# Set up vim with desired default plugins and config.
 			(vim_configurable.customize {
 				name = "vim";
@@ -51,8 +57,6 @@
 		variables = {
 			EDITOR = "vim";
 		};
-
-
 
 	};
 

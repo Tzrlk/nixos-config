@@ -27,7 +27,7 @@
 		];
 		hashedPassword = "$6$aH7aw9BTd2D3H6mC$JkzHgh64edJBJZWDPKgiEl9Rj42dB676XUMyfZHX6WuSxfJ1H62x7vZBfcJbV7HiVTXzxVARQ9C5QhgTJop16.";
 		packages = with pkgs; [
-			jetbrains.idea-ultimate
+#			jetbrains.idea-ultimate
 		];
 	};
 

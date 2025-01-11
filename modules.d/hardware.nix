@@ -3,6 +3,7 @@
 
 	imports = [
 		( modulesPath + "/installer/scan/not-detected.nix" )
+#		./disko-config.nix
 	];
 
 	# Enable sound.
